@@ -1,0 +1,105 @@
+{
+  "name": "caladyn",
+  "description": "Caladyn is a mystical location set in a photorealistic Arabian Nights-inspired desert high fantasy. This enchanting desert environment is characterized by vast, golden dunes, ancient architecture, and a magical atmosphere filled with shimmering heat and a sense of wonder.",
+  "objects": [
+    {
+      "name": "Golden Dune",
+      "description": "A large, sweeping sand dune with a golden hue, shaped by the desert winds.",
+      "type": "object",
+      "prompt": "A large, isolated sand dune with a golden hue, centered in frame on a fully transparent background. The dune should have gentle, flowing curves, capturing the softness of desert sands.",
+      "quantity": 10,
+      "placement_notes": "Place dunes sporadically across the landscape to create a natural desert terrain.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Ancient Ruins",
+      "description": "Remains of an ancient stone structure, featuring ornate carvings and partially crumbled walls.",
+      "type": "object",
+      "prompt": "A segment of ancient stone ruins, featuring intricate carvings and partially crumbled walls, centered in frame on a fully transparent background.",
+      "quantity": 3,
+      "placement_notes": "Scatter ruins around the location to suggest a once-thriving civilization.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Oasis",
+      "description": "A small, lush oasis with palm trees and a clear, reflective pond.",
+      "type": "object",
+      "prompt": "A small oasis with several palm trees and a clear, reflective pond, centered in frame on a fully transparent background.",
+      "quantity": 1,
+      "placement_notes": "Position the oasis in a central location to serve as a focal point for the environment.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Desert Rock",
+      "description": "A large, weathered rock formation commonly found in desert landscapes.",
+      "type": "object",
+      "prompt": "A large, isolated desert rock formation with a weathered appearance, centered in frame on a fully transparent background.",
+      "quantity": 5,
+      "placement_notes": "Place rocks sporadically to add variety to the desert terrain.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Arabian Archway",
+      "description": "An ornate stone archway with intricate patterns, typical of Arabian architecture.",
+      "type": "object",
+      "prompt": "An ornate stone archway with intricate Arabian patterns, centered in frame on a fully transparent background.",
+      "quantity": 2,
+      "placement_notes": "Position archways near ruins or as standalone structures for visual interest.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Desert Ground Texture",
+      "description": "A high-resolution texture of desert sand with subtle wind patterns.",
+      "type": "texture",
+      "prompt": "A high-resolution texture capturing the fine details of desert sand with subtle wind patterns, designed for seamless tiling.",
+      "quantity": 1,
+      "placement_notes": "Apply this texture to the landscape to create the sandy ground surface.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Oasis Water Texture",
+      "description": "A texture of clear, reflective water suitable for an oasis pond.",
+      "type": "texture",
+      "prompt": "A clear, reflective water texture for use in an oasis pond, capturing the essence of tranquility and freshness.",
+      "quantity": 1,
+      "placement_notes": "Use this texture for the water surface in the oasis.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Whispering Wind Audio",
+      "description": "An ambient audio track of soft desert winds gently blowing across sand dunes.",
+      "type": "audio",
+      "prompt": "An ambient audio recording of soft desert winds, capturing the gentle, continuous sound of wind blowing across sand dunes.",
+      "quantity": 1,
+      "placement_notes": "Play this audio throughout the environment to enhance the desert atmosphere.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    },
+    {
+      "name": "Cicada Chorus Audio",
+      "description": "A soundscape of cicadas chirping, common in hot desert environments.",
+      "type": "audio",
+      "prompt": "A soundscape of cicadas chirping, providing a rhythmic and ambient background typical of hot desert environments.",
+      "quantity": 1,
+      "placement_notes": "Layer this audio with the wind to add depth to the environmental soundscape.",
+      "application": null,
+      "duration": null,
+      "loop": null
+    }
+  ]
+}
