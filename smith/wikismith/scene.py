@@ -7,7 +7,7 @@ from smith.clients.openai import OpenAI
 from config import config
 from smith.models.location import Location
 from smith.models.scene import Scene
-from smith.models.game_object import object_types
+from smith.models.game_object import GameObject, object_types
 
 
 def create_scene_wiki(location_name: str, scene: str, prompt: str):
@@ -38,15 +38,14 @@ def create_scene_wiki(location_name: str, scene: str, prompt: str):
     )
     
     system_prompt = f"You are a game development assistant specializing in Unreal Engine {config.unreal_engine_version} asset management and prompt engineering."
-    location_data_dict = OpenAI.complete(system_prompt, user_prompt, arts_urls)
-    location_data = Scene(**location_data_dict)
-    location_path.mkdir(parents=True, exist_ok=True)
+    response = OpenAI.complete(system_prompt, user_prompt, arts_urls)
+    scene_wiki.objects = [GameObject(**object) for object in response["objects"]]
     
     with open(scene_wiki_path, 'w', encoding='utf-8') as f:
-        f.write(location_data.model_dump_json(indent=2))
+        f.write(scene_wiki.model_dump_json(indent=2))
     
     print(f"Scene wiki saved to {scene_wiki_path}")
-    return location_data
+    return scene_wiki
 
 
 def build_prompt(location_wiki: Location, scene_wiki: Scene, user_prompt: str) -> str:

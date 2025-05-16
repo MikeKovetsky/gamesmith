@@ -20,6 +20,3 @@ class GameObject(BaseModel):
     prompt: str
     quantity: Optional[int] = None
     placement_notes: Optional[str] = None
-    application: Optional[str] = None
-    duration: Optional[str] = None
-    loop: Optional[bool] = None
