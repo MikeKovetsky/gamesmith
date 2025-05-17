@@ -1,5 +1,63 @@
 {
   "name": "caladyn",
   "description": "A high fantasy location with a desert theme.",
-  "style": "Photorealistic Arabian Nights Desert High Fantasy"
+  "style": "Photorealistic Arabian Nights Desert High Fantasy",
+  "assets": [
+    {
+      "name": "sand_dunes_texture",
+      "description": "A seamless sand dune texture capturing the fine grains and subtle wind patterns typical of a desert environment.",
+      "type": "texture",
+      "prompt": "Create a seamless, tileable sand dune texture with fine grains and subtle wind patterns. Ensure the texture is captured under neutral, shadow-free lighting. Provide three variations of the texture to depict different levels of sand displacement. Target resolution: 4K.",
+      "quantity": 1,
+      "placement_notes": "Apply to desert floor and dune surfaces."
+    },
+    {
+      "name": "rocky_cliff_texture",
+      "description": "A seamless rocky cliff texture that showcases the rough, jagged surface of desert cliffs with varying shades of brown and orange.",
+      "type": "texture",
+      "prompt": "Create a seamless, tileable rocky cliff texture with rough, jagged surfaces and varying shades of brown and orange. Capture under neutral lighting to avoid shadows. Provide three subtle variations to depict different rock formations. Target resolution: 4K.",
+      "quantity": 1,
+      "placement_notes": "Apply to cliff faces and rocky outcrops."
+    },
+    {
+      "name": "desert_ambient_audio",
+      "description": "Ambient soundscape of a desert environment with distant wind, occasional rustling of palm leaves, and faint animal calls.",
+      "type": "audio",
+      "prompt": "Create a 30-second seamless loop of ambient desert sounds featuring distant wind, occasional rustling of palm leaves, and faint animal calls. The mood should be calm and expansive, evoking the vastness of the desert.",
+      "quantity": 1,
+      "placement_notes": "Background audio for the entire desert environment."
+    },
+    {
+      "name": "palm_tree_object",
+      "description": "A tall, slender palm tree with a rough, textured trunk and a lush canopy of long, green fronds.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a tall palm tree with a rough, textured trunk and a lush canopy of long, green fronds. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Place in clusters or singly throughout the desert environment."
+    },
+    {
+      "name": "ancient_temple_ruins_object",
+      "description": "Ruined structure of an ancient temple with weathered stone blocks, arches, and partially collapsed walls.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of ancient temple ruins with weathered stone blocks, arches, and partially collapsed walls. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Position in the background to create depth and intrigue."
+    },
+    {
+      "name": "oasis_water_texture",
+      "description": "A seamless, tileable texture of clear oasis water with gentle ripples and reflections.",
+      "type": "texture",
+      "prompt": "Create a seamless, tileable texture depicting clear oasis water with gentle ripples and reflections. Capture under neutral lighting to avoid shadows. Provide two variations to show slight changes in ripple patterns. Target resolution: 2K.",
+      "quantity": 1,
+      "placement_notes": "Apply to water bodies within the oasis areas."
+    },
+    {
+      "name": "giant_robot_object",
+      "description": "A large, partially buried robot with a weathered metallic surface, visible joints, and intricate mechanical details.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a large, partially buried robot with a weathered metallic surface, visible joints, and intricate mechanical details. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Place partially emerging from the sand to add a sense of mystery."
+    }
+  ]
 }

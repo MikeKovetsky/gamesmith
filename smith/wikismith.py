@@ -94,6 +94,6 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
     
 
 if __name__ == "__main__":
-    create_node_map("caladyn")
+    create_node_map("caladyn/cala/market")
 
 

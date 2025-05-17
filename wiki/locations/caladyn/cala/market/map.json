@@ -1,5 +1,71 @@
 {
   "name": "cala/market",
   "description": "A bustling desert market in the city of Cala.",
-  "style": "Photorealistic Arabian Nights Desert High Fantasy"
+  "style": "Photorealistic Arabian Nights Desert High Fantasy",
+  "assets": [
+    {
+      "name": "market_stall",
+      "description": "A wooden market stall with a beige cloth canopy, sturdy wooden frame, and detailed joinery.",
+      "type": "object",
+      "prompt": "An isolated wooden market stall with a beige cloth canopy. The frame is made of weathered wood, with visible grain and detailed joinery. The cloth is slightly worn and draped naturally over the frame. Fully transparent background.",
+      "quantity": 5,
+      "placement_notes": "Place in rows throughout the market scene."
+    },
+    {
+      "name": "stone_pavement_texture",
+      "description": "A seamless, tileable texture of cobblestone pavement with a rough surface.",
+      "type": "texture",
+      "prompt": "A seamless cobblestone pavement texture with rough, uneven stones in neutral lighting. The stones vary slightly in size and shape, with subtle variations in color from grey to brown. 4K resolution.",
+      "quantity": 1,
+      "placement_notes": "Apply to the ground throughout the market area."
+    },
+    {
+      "name": "palm_tree",
+      "description": "A tall palm tree with a textured trunk and lush, green fronds.",
+      "type": "object",
+      "prompt": "A tall palm tree with a textured trunk, showcasing the rough, fibrous bark. The fronds are lush and green, fanning out in a natural spread. Fully transparent background.",
+      "quantity": 3,
+      "placement_notes": "Distribute around the edges of the market scene."
+    },
+    {
+      "name": "clay_pot",
+      "description": "A medium-sized clay pot with a smooth surface and earthy tones.",
+      "type": "object",
+      "prompt": "A medium-sized clay pot with a smooth surface, earthy red-brown tones, and a simple, rounded shape. Fully transparent background.",
+      "quantity": 10,
+      "placement_notes": "Place on market stalls and around the scene."
+    },
+    {
+      "name": "fabric_texture",
+      "description": "A seamless, tileable texture of coarse linen fabric in earthy tones.",
+      "type": "texture",
+      "prompt": "A seamless coarse linen fabric texture with visible weave patterns. Earthy tones ranging from beige to light brown. Neutral lighting, 2K resolution.",
+      "quantity": 3,
+      "placement_notes": "Use for market stall canopies and clothing."
+    },
+    {
+      "name": "market_ambient_audio",
+      "description": "A bustling market ambience with distant chatter, bartering, and occasional footsteps.",
+      "type": "audio",
+      "prompt": "A bustling market ambience featuring distant chatter, occasional bartering sounds, and footsteps on cobblestone. Includes subtle background sounds of fabric rustling and wooden stalls creaking. 60-second loop, seamlessly loopable.",
+      "quantity": 1,
+      "placement_notes": "Play throughout the market scene for ambient atmosphere."
+    },
+    {
+      "name": "stone_building_texture",
+      "description": "A seamless, tileable texture of aged stone blocks with weathered surfaces.",
+      "type": "texture",
+      "prompt": "A seamless texture of aged stone blocks, featuring weathered surfaces and subtle cracks. The stones vary in color from light tan to grey, with some moss growth. Neutral lighting, 4K resolution.",
+      "quantity": 3,
+      "placement_notes": "Apply to the walls of surrounding buildings."
+    },
+    {
+      "name": "fruit_basket",
+      "description": "A wooden basket filled with bright red apples.",
+      "type": "object",
+      "prompt": "A wooden basket filled with bright red apples. The basket has a woven texture, and the apples are shiny with slight variations in shape and color. Fully transparent background.",
+      "quantity": 5,
+      "placement_notes": "Place on market stalls in various locations."
+    }
+  ]
 }
