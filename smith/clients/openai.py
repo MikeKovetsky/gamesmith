@@ -29,3 +29,31 @@ class OpenAI(BaseModel):
         content = response.choices[0].message.content
         data_dict = json.loads(content)
         return data_dict
+
+    @staticmethod
+    def create_image(prompt: str, size: str = "1024x1024", model: str = "gpt-image-1") -> str:
+        """Generate an image from a text prompt using the newest GPT image model.
+
+        Parameters
+        ----------
+        prompt : str
+            The textual description of the desired image.
+        size : str, optional
+            Resolution requested (e.g. "1024x1024"). Defaults to 1024×1024.
+        model : str, optional
+            Which image-generation model to use. Defaults to ``gpt-image-1`` as per
+            https://platform.openai.com/docs/guides/image-generation?image-generation-model=gpt-image-1
+
+        Returns
+        -------
+        str
+            A direct URL to the generated image.
+        """
+        client = openai.OpenAI()
+        response = client.images.generate(
+            model=model,
+            prompt=prompt,
+            n=1,
+            size=size,
+        )
+        return response.data[0].b64_json
