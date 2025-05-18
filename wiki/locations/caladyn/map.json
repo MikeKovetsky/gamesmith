@@ -12,6 +12,14 @@
       "placement_notes": "Apply to desert floor and dune surfaces."
     },
     {
+      "name": "sand_dunes_texture_variant",
+      "description": "A seamless sand dune texture similar to the existing one, with additional subtle variations in grain and pattern.",
+      "type": "texture",
+      "prompt": "Create a seamless, tileable sand dune texture with fine grains and subtle wind patterns, similar to the existing texture. Ensure the texture is captured under neutral, shadow-free lighting. Provide three variations to depict different levels of sand displacement, slightly different from the original. Target resolution: 4K.",
+      "quantity": 1,
+      "placement_notes": "Apply to desert floor and dune surfaces as an alternative option."
+    },
+    {
       "name": "rocky_cliff_texture",
       "description": "A seamless rocky cliff texture that showcases the rough, jagged surface of desert cliffs with varying shades of brown and orange.",
       "type": "texture",
@@ -58,6 +66,46 @@
       "prompt": "Create an isolated, centered image of a large, partially buried robot with a weathered metallic surface, visible joints, and intricate mechanical details. Ensure a fully transparent background for easy mesh extraction.",
       "quantity": 1,
       "placement_notes": "Place partially emerging from the sand to add a sense of mystery."
+    },
+    {
+      "name": "desert_bush_object",
+      "description": "A small, hardy desert bush with spiky branches and sparse green foliage.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a small desert bush with spiky branches and sparse green foliage. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Scatter in groups throughout the desert floor."
+    },
+    {
+      "name": "desert_flower_object",
+      "description": "A vibrant desert flower with bright petals and a sturdy stem.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a desert flower with bright petals and a sturdy stem. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Place sporadically for color contrast in the desert landscape."
+    },
+    {
+      "name": "desert_temple_object",
+      "description": "A grand desert temple with intricate arches, domed roofs, and decorative stonework.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a grand desert temple with intricate arches, domed roofs, and detailed stonework. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Place prominently in the environment to serve as a focal point."
+    },
+    {
+      "name": "large_desert_bush_object",
+      "description": "A larger desert bush with thicker branches and more abundant foliage compared to typical desert bushes.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a large desert bush with thick branches and abundant foliage. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Use as a prominent feature in desert areas to break up open spaces."
+    },
+    {
+      "name": "desert_cactus_object",
+      "description": "A tall desert cactus with a thick, ribbed body and several arms extending outwards.",
+      "type": "object",
+      "prompt": "Create an isolated, centered image of a tall desert cactus with a thick, ribbed body and several arms extending outwards. Ensure a fully transparent background for easy mesh extraction.",
+      "quantity": 1,
+      "placement_notes": "Place sporadically throughout the desert to add vertical interest."
     }
   ]
 }

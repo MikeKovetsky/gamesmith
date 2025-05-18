@@ -36,9 +36,11 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
     
     node = get_node_map(node_name)
     
-    sections: List[str] = [
-        f"Edit and expand the location: {node_name}" if node else f"Create the location: {node_name}."
-    ]
+    sections: List[str] = []
+    if node:
+        sections.append(f"Change the list of existing assets for the location: {node_name}. Existing assets: {node.assets}. Make sure to preserve the existing assets and add/change new ones.")
+    else:
+        sections.append(f"Create assets for the location: {node_name}.")
 
     guidelines: List[str] = [
         f"Answer with a detailed JSON description of all assets needed for the location called {node_name}."
@@ -88,12 +90,12 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
         )
     )
 
-    sections.append(f"User instructions: {user_prompt}")
+    sections.append(f"Important additional user instructions: {user_prompt}")
 
     return "\n\n".join(sections)
     
 
 if __name__ == "__main__":
-    create_node_map("caladyn/cala/market")
+    create_node_map("caladyn", "add one more bush and 1 cactus")
 
 

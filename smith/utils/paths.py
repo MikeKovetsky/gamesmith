@@ -19,6 +19,10 @@ def get_node_map_path(node_name: str) -> Path:
     return get_node_path(node_name) / "map.json"
 
 
+def get_assets_path(node_name: str) -> Path:
+    return get_node_path(node_name) / "assets"
+
+
 def get_node_arts(node_name: str) -> list[str]:
     node_path = get_node_path(node_name)
     arts_path = node_path / "assets" / "arts"

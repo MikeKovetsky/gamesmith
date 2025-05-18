@@ -4,25 +4,25 @@ import requests
 from smith.clients.openai import OpenAI
 from smith.clients.replicate import Replicate
 from smith.models.asset import Asset
-from smith.models.node import Scene
+from smith.models.node import Node
 from config import config
-from smith.utils.paths import get_scene_path
+from smith.utils.paths import get_assets_path
 
 
-def create_object(scene: Scene, game_object: Asset) -> str:
-     output_dir = get_scene_path(scene.location, scene.name) / "models"
+def create_object(node: Node, game_object: Asset) -> str:
+     output_dir = get_assets_path(node.name) / "models"
      output_dir.mkdir(parents=True, exist_ok=True)
      path = output_dir / f"{game_object.name}.glb"
      
      if path.exists():
-          print(f"Object {game_object.name} already exists in {scene.location} / {scene.name}")
+          print(f"Object {game_object.name} already exists in {node.name}")
           return path
      
      print(f"Creating a reference image for {game_object.name}")
      reference_image_url = _create_reference_image(game_object)
-     print(f"Creating object for {game_object.name} in {scene.location}/{scene.name} from {reference_image_url}")
+     print(f"Creating object for {game_object.name} in {node.name} from {reference_image_url}")
      asset_url = _create_object(reference_image_url)
-     print(f"Saved object from {asset_url}")
+     print(f"Saved object {game_object.name} from {asset_url}")
      bytes = requests.get(asset_url).content
      with open(path, "wb") as f:
           f.write(bytes)
