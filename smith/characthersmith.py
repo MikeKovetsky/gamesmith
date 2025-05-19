@@ -3,12 +3,17 @@ import json
 import requests
 from pathlib import Path
 from typing import List, Optional
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from config import config
-from smith.clients.openai import OpenAI
 from smith.clients.replicate import Replicate
 from smith.models.wiki import WikiType, wiki_type_to_path
-from smith.utils.paths import get_assets_path, get_node_arts, get_node_map_path
+from smith.utils.paths import (
+    get_model_path,
+    get_node_arts,
+    get_node_map_path,
+    get_prepared_assets_path,
+)
 
 
 wiki_type = WikiType.CHARACTER
@@ -79,6 +84,7 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     # 1. Gather reference images (arts)
     # ------------------------------------------------------------------
     art_names = get_node_arts(wiki_type, character_path)
+    # URLs of the original concept arts (remote)
     art_urls = [
         f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{character_path}/assets/arts/{name}"
         for name in art_names
@@ -86,6 +92,11 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
 
     if not art_urls:
         raise RuntimeError(f"No concept-art images found for character '{character_path}'.")
+
+    # ------------------------------------------------------------------
+    # 1b. Ensure prepared art exists and retrieve remote URL (transparent, T-pose if humanoid)
+    # ------------------------------------------------------------------
+    prepared_image_url = _ensure_prepared_art(character_path, art_names)
 
     # ------------------------------------------------------------------
     # 2. Prepare / fetch existing metadata and build prompt
@@ -104,7 +115,12 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
         "You are a creative game-writing assistant specialised in writing a config/metadata for NPCs and creatures."
     )
 
-    response = OpenAI.complete(system_prompt, user_prompt, art_urls)
+    response = {
+        "replicas": [],
+        "sounds": [],
+        "voice_id": "1",
+        "items_to_drop": [],
+    }
 
     # Ensure mandatory keys are present / have expected values.
     response.setdefault("voice_id", "1")
@@ -117,20 +133,17 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     print(f"Metadata saved to {metadata_path.relative_to(Path.cwd())}")
 
     # ------------------------------------------------------------------
-    # 4. Build 3-D model with Trellis (skip if it already exists)
+    # 4. Build 3-D model with Trellis – use prepared arts when present
     # ------------------------------------------------------------------
-    models_dir = get_assets_path(wiki_type, character_path)
-    models_dir.mkdir(parents=True, exist_ok=True)
-    model_file_path = models_dir / "models" / f"{character_path.split('/')[-1]}.glb"
 
-    if model_file_path.exists():
-        print(f"3-D model already exists → {model_file_path.relative_to(Path.cwd())}")
-        return response
+    if prepared_image_url:
+        trellis_images = [prepared_image_url]
+    else:
+        trellis_images = art_urls
 
-    print(f"Generating 3-D model for '{character_path}' with Trellis…")
     trellis_input = {
         "seed": 0,
-        "images": art_urls,
+        "images": trellis_images,
         "texture_size": 2048,
         "mesh_simplify": 0.9,
         "generate_color": True,
@@ -157,6 +170,10 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     except Exception as exc:
         raise RuntimeError(f"Failed to download Trellis model from {model_url!r}: {exc}")
 
+    models_dir = get_model_path(wiki_type, character_path)
+    models_dir.mkdir(parents=True, exist_ok=True)
+    model_file_path = models_dir / f"{character_path.split('/')[-1]}.glb"
+
     with open(model_file_path, "wb") as fp:
         fp.write(model_bytes)
     print(f"3-D model stored at {model_file_path.relative_to(Path.cwd())}")
@@ -164,7 +181,86 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     return response
 
 
+def _ensure_prepared_art(character_path: str, art_names: List[str]) -> Optional[str]:
+    """Ensure a prepared art PNG exists and return its remote URL for Trellis.
+
+    The image is generated via Replicate `openai/gpt-image-1`, stored locally in
+    `prepared_arts`, and its CDN URL is returned so Trellis can reference it.
+    If the image already exists and no new generation happens, returns ``None``.
+    """
+
+    if not art_names:
+        return None
+
+    original_name: str = art_names[0]
+
+    prepared_dir = get_prepared_assets_path(wiki_type, character_path)
+    prepared_dir.mkdir(parents=True, exist_ok=True)
+    prepared_path = prepared_dir / original_name
+
+    if prepared_path.exists():
+        print(f"Prepared art already exists → {prepared_path.relative_to(Path.cwd())}")
+        return None
+
+    print(f"Generating prepared art for '{character_path}' via Replicate (gpt-image-1)…")
+
+    # Build a descriptive prompt – ensure transparent background and T-pose when applicable.
+    char_name = character_path.split("/")[-1].replace("_", " ")
+    prompt = (
+        f"Full-body illustration of {char_name} standing on a completely transparent background; "
+        f"if the character is humanoid, depict them in a neutral T-pose (arms extended horizontally). "
+        f"Keep the style of the original image. No background, only the character with alpha transparency."
+    )
+
+    try:
+        replicate_response = Replicate.run_replicate(
+            model="openai/gpt-image-1",
+            input={
+                "prompt": prompt,
+                "quality": "high",
+                "background": "transparent",
+                "moderation": "auto",
+                "aspect_ratio": "1:1",
+                "output_format": "png",
+                "number_of_images": 1,
+                "openai_api_key": config.openai_api_key,
+                "output_compression": 90,
+            },
+        )
+
+        # The response is a list; grab the first image URL (object or dict).
+        first = replicate_response[0]
+        image_url = first.url if hasattr(first, "url") else first.get("url")
+
+        # Download and save locally for Trellis.
+        image_bytes = requests.get(image_url).content
+        with open(prepared_path, "wb") as fp:
+            fp.write(image_bytes)
+        print(f"Prepared art saved to {prepared_path.relative_to(Path.cwd())} (source: {image_url})")
+        return image_url
+    except Exception as exc:
+        print(f"⚠️  Failed to generate prepared art for '{character_path}': {exc}")
+        return None
+
+
 if __name__ == "__main__":
-    mobs = ["glasslurker", "jewelspine_basilisk", "paleheart", "sunflare_quenit"]
-    for mob in mobs:
-        create_character(f"caladyn/mobs/{mob}")
+    mobs = [
+        "dustmother",
+    ]
+
+    character_paths = [f"caladyn/ashwalkers/{mob}" for mob in mobs]
+
+    # Use a thread-pool to run network-bound tasks concurrently.
+    max_workers = min(4, len(character_paths))  # avoid spawning excessive threads
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_path = {
+            executor.submit(create_character, path): path for path in character_paths
+        }
+
+        for future in as_completed(future_to_path):
+            path = future_to_path[future]
+            try:
+                future.result()
+                print(f"✅ Finished {path}")
+            except Exception as exc:
+                print(f"❌ Error processing {path}: {exc}")

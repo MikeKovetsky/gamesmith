@@ -7,6 +7,7 @@ from smith.assetsmith.object import create_object
 from smith.models.node import Node
 from smith.models.asset import Asset, AssetType
 from smith.assetsmith.texture import create_texture
+from smith.models.wiki import WikiType
 from smith.utils.paths import get_node_map
 
 __all__ = [
@@ -33,7 +34,7 @@ async def _create_asset(node: Node, asset: Asset) -> Any:
 
 async def create_assets(node_name: str) -> Node:
 
-    node = get_node_map(node_name)
+    node = get_node_map(WikiType.LOCATION, node_name)
     
     if not node.assets:
         raise ValueError(f"No assets found in map for node: {node_name}")
@@ -48,4 +49,4 @@ async def create_assets(node_name: str) -> Node:
 
 
 if __name__ == "__main__":
-    asyncio.run(create_assets("caladyn"))
+    asyncio.run(create_assets("caladyn/shatterdunes/crimson_shard"))

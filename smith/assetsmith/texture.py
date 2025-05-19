@@ -1,6 +1,7 @@
 import base64
 from smith.models.asset import Asset
 from smith.models.node import Node
+from smith.models.wiki import WikiType
 from smith.utils.paths import get_assets_path
 from smith.clients.openai import OpenAI
 
@@ -10,7 +11,7 @@ def create_texture(node: Node, asset: Asset) -> str:
     
     print(f"Creating texture for {node.name}")
 
-    output_dir = get_assets_path(node.name) / "textures"
+    output_dir = get_assets_path(WikiType.LOCATION, node.name) / "textures"
     output_dir.mkdir(parents=True, exist_ok=True)
 
     filename = f"{asset.name}.png"

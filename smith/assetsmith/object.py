@@ -6,11 +6,12 @@ from smith.clients.replicate import Replicate
 from smith.models.asset import Asset
 from smith.models.node import Node
 from config import config
+from smith.models.wiki import WikiType
 from smith.utils.paths import get_assets_path
 
 
 def create_object(node: Node, game_object: Asset) -> str:
-     output_dir = get_assets_path(node.name) / "models"
+     output_dir = get_assets_path(WikiType.LOCATION, node.name) / "models"
      output_dir.mkdir(parents=True, exist_ok=True)
      path = output_dir / f"{game_object.name}.glb"
      

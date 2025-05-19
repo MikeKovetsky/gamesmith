@@ -1,5 +1,55 @@
 {
-  "name": "crimson_shard",
+  "name": "caladyn/shatterdunes/crimson_shard",
   "description": "An unknown huge red instance resemling a rocker from another civilization.",
-  "style": "Photorealistic Arabian Nights Desert High Fantasy, dark red color palette, grim and dark atmosphere"
+  "style": "Photorealistic Arabian Nights Desert High Fantasy, dark red color palette, grim and dark atmosphere",
+  "assets": [
+    {
+      "name": "crimson_shard",
+      "description": "A large, jagged crystal shard with a glowing red core, featuring sharp edges and a reflective surface.",
+      "type": "object",
+      "prompt": "An isolated, large, jagged crystal shard with a glowing red core, sharp edges, and a reflective surface. The shard is centered in the frame against a fully transparent background.",
+      "quantity": 1,
+      "placement_notes": "Positioned prominently in the center of the dunes."
+    },
+    {
+      "name": "ancient_ruins",
+      "description": "Ruined stone structures resembling ancient temples, with weathered surfaces and intricate carvings.",
+      "type": "object",
+      "prompt": "Isolated ancient stone ruins resembling temples, with weathered surfaces and intricate carvings. Centered in frame with a fully transparent background.",
+      "quantity": 3,
+      "placement_notes": "Scattered around the environment, partially buried in sand."
+    },
+    {
+      "name": "palm_tree",
+      "description": "Tall palm trees with slender trunks and a cluster of large, green fronds at the top.",
+      "type": "object",
+      "prompt": "An isolated tall palm tree with a slender trunk and a cluster of large, green fronds at the top. Centered in frame with a fully transparent background.",
+      "quantity": 10,
+      "placement_notes": "Distributed throughout the sandy landscape."
+    },
+    {
+      "name": "red_sky_texture",
+      "description": "A seamless, tileable texture of a red, swirling sky with subtle cloud patterns.",
+      "type": "texture",
+      "prompt": "Seamless, tileable texture of a red, swirling sky with subtle cloud patterns. Captured under neutral, shadow-free lighting. Intended resolution: 4K.",
+      "quantity": 1,
+      "placement_notes": "Used for the skybox or background environment."
+    },
+    {
+      "name": "red_sand_texture",
+      "description": "A seamless, tileable texture of fine red sand with variations in grain size and subtle shadows.",
+      "type": "texture",
+      "prompt": "Seamless, tileable texture of fine red sand with variations in grain size and subtle shadows. Captured under neutral, shadow-free lighting. Three subtle variations. Intended resolution: 4K.",
+      "quantity": 3,
+      "placement_notes": "Applied to the ground surface throughout the environment."
+    },
+    {
+      "name": "wind_ambience",
+      "description": "The sound of a strong wind blowing across a desert, with occasional whistling through structures.",
+      "type": "audio",
+      "prompt": "Sound of a strong wind blowing across a desert, with occasional whistling through nearby structures. Desired duration: 60s loop, should loop seamlessly.",
+      "quantity": 1,
+      "placement_notes": "Ambient background sound for the entire environment."
+    }
+  ]
 }

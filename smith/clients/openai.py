@@ -27,6 +27,8 @@ class OpenAI(BaseModel):
             temperature=0.7,
         )
         content = response.choices[0].message.content
+        if content is None:
+            raise ValueError(f"No content returned from OpenAI. Message: {response.choices[0].message}")
         data_dict = json.loads(content)
         return data_dict
 
@@ -55,5 +57,6 @@ class OpenAI(BaseModel):
             prompt=prompt,
             n=1,
             size=size,
+            response_format="b64_json",
         )
         return response.data[0].b64_json
