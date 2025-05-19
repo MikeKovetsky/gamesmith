@@ -1,17 +1,18 @@
 import json
-from typing import List, Optional
 
 from smith.clients.openai import OpenAI
 from config import config
 from smith.models.asset import Asset, asset_types
-from smith.models.node import Node
-from smith.utils.paths import get_node_arts, get_node_map, get_node_map_path, get_node_path
+from smith.models.wiki import WikiType, wiki_type_to_path
+from smith.utils.paths import get_node_arts, get_node_map, get_node_map_path
+
+wiki_type = WikiType.LOCATION
 
 
-def create_node_map(node_name: str, custom_prompt: str = ""):
-    node_map = get_node_map(node_name)
-    arts_names = get_node_arts(node_name)
-    arts_urls = [f"{config.wiki_cdn_url}/locations/{node_name}/assets/arts/{art_name}" for art_name in arts_names]
+def create_location_map(node_name: str, custom_prompt: str = ""):
+    node_map = get_node_map(wiki_type, node_name)
+    arts_names = get_node_arts(wiki_type, node_name)
+    arts_urls = [f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{node_name}/assets/arts/{art_name}" for art_name in arts_names]
 
     user_prompt = build_prompt(node_name, custom_prompt)
     system_prompt = (
@@ -23,7 +24,7 @@ def create_node_map(node_name: str, custom_prompt: str = ""):
     assets = [Asset(**asset) for asset in response["assets"]]
 
     node_map.assets = assets
-    node_map_path = get_node_map_path(node_name)
+    node_map_path = get_node_map_path(wiki_type, node_name)
 
     with open(node_map_path, "w", encoding="utf-8") as f:
         f.write(node_map.model_dump_json(indent=2))
@@ -34,15 +35,15 @@ def create_node_map(node_name: str, custom_prompt: str = ""):
 
 def build_prompt(node_name: str, user_prompt: str) -> str:
     
-    node = get_node_map(node_name)
+    node = get_node_map(wiki_type, node_name)
     
-    sections: List[str] = []
+    sections: list[str] = []
     if node:
         sections.append(f"Change the list of existing assets for the location: {node_name}. Existing assets: {node.assets}. Make sure to preserve the existing assets and add/change new ones.")
     else:
         sections.append(f"Create assets for the location: {node_name}.")
 
-    guidelines: List[str] = [
+    guidelines: list[str] = [
         f"Answer with a detailed JSON description of all assets needed for the location called {node_name}."
         f"The assets will be used to produce assets for in Unreal Engine {config.unreal_engine_version}."
         "Look closely at the provided reference images.",
@@ -96,6 +97,6 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
     
 
 if __name__ == "__main__":
-    create_node_map("caladyn", "add one more bush and 1 cactus")
+    create_location_map("caladyn", "add one more bush and 1 cactus")
 
 
