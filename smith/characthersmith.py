@@ -8,7 +8,7 @@ from config import config
 from smith.clients.openai import OpenAI
 from smith.clients.replicate import Replicate
 from smith.models.wiki import WikiType, wiki_type_to_path
-from smith.utils.paths import get_assets_path, get_node_arts
+from smith.utils.paths import get_assets_path, get_node_arts, get_node_map_path
 
 
 wiki_type = WikiType.CHARACTER
@@ -164,4 +164,4 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
 
 
 if __name__ == "__main__":
-    create_character("mobs/crab")
+    create_character("caladyn/mobs/crab")

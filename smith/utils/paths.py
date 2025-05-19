@@ -1,6 +1,4 @@
-import os
 from pathlib import Path
-from typing import Optional
 
 from config import config
 from smith.models.node import Node
