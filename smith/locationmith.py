@@ -97,6 +97,6 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
     
 
 if __name__ == "__main__":
-    create_location_map("caladyn", "add one more bush and 1 cactus")
+    create_location_map("caladyn/", "add one more bush and 1 cactus")
 
 

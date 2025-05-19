@@ -40,10 +40,10 @@ def _build_prompt(character_path: str, existing_metadata: Optional[dict], user_p
 
     guidelines: List[str] = [
         "Answer with a *valid JSON object* with exactly the following keys *in the root*: \n"
-        "  - replicas: array of strings containing lines the character may say during gameplay. Provide at least 10 unique lines.\n"
+        "  - replicas: empty list\n"
+        "  - sounds: empty list.\n"
         "  - voice_id: always the string \"1\" (hard-coded for now).\n"
-        "  - items_to_drop: an (initially) empty array.\n",
-        "Keep the content appropriate for a T-rated fantasy RPG.",
+        "  - items_to_drop: an empty array.\n",
         "Do NOT include any additional keys or comments outside the JSON object.",
     ]
 
@@ -72,13 +72,15 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     dict
         The freshly generated metadata dictionary.
     """
+    
+    print(f"Creating character: {character_path}")
 
     # ------------------------------------------------------------------
     # 1. Gather reference images (arts)
     # ------------------------------------------------------------------
     art_names = get_node_arts(wiki_type, character_path)
     art_urls = [
-        f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{character_path}/arts/{name}"
+        f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{character_path}/assets/arts/{name}"
         for name in art_names
     ]
 
@@ -94,13 +96,12 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
         try:
             existing_metadata = json.loads(metadata_path.read_text())
         except json.JSONDecodeError:
-            print(f"⚠️  Existing metadata.json for '{character_path}' is not valid JSON – it will be ignored and regenerated.")
+            print(f"⚠️  Existing map.json for '{character_path}' is not valid JSON – it will be ignored and regenerated.")
 
     user_prompt = _build_prompt(character_path, existing_metadata, custom_prompt)
 
     system_prompt = (
-        "You are a creative game-writing assistant specialised in bringing NPCs and "
-        "creatures to life through engaging dialogue."
+        "You are a creative game-writing assistant specialised in writing a config/metadata for NPCs and creatures."
     )
 
     response = OpenAI.complete(system_prompt, user_prompt, art_urls)
@@ -120,7 +121,7 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     # ------------------------------------------------------------------
     models_dir = get_assets_path(wiki_type, character_path)
     models_dir.mkdir(parents=True, exist_ok=True)
-    model_file_path = models_dir / f"{character_path.split('/')[-1]}.glb"
+    model_file_path = models_dir / "models" / f"{character_path.split('/')[-1]}.glb"
 
     if model_file_path.exists():
         print(f"3-D model already exists → {model_file_path.relative_to(Path.cwd())}")
@@ -129,7 +130,7 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     print(f"Generating 3-D model for '{character_path}' with Trellis…")
     trellis_input = {
         "seed": 0,
-        "images": art_urls,  # We pass *all* concept-art images to Trellis
+        "images": art_urls,
         "texture_size": 2048,
         "mesh_simplify": 0.9,
         "generate_color": True,
@@ -164,4 +165,6 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
 
 
 if __name__ == "__main__":
-    create_character("caladyn/mobs/crab")
+    mobs = ["glasslurker", "jewelspine_basilisk", "paleheart", "sunflare_quenit"]
+    for mob in mobs:
+        create_character(f"caladyn/mobs/{mob}")
