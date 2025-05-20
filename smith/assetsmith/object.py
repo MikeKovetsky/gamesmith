@@ -1,5 +1,3 @@
-import base64
-
 import requests
 from smith.clients.openai import OpenAI
 from smith.clients.replicate import Replicate

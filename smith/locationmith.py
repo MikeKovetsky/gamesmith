@@ -6,6 +6,7 @@ from smith.models.asset import Asset, asset_types
 from smith.models.wiki import WikiType, wiki_type_to_path
 from smith.utils.paths import get_node_arts, get_node_map, get_node_map_path
 
+
 wiki_type = WikiType.LOCATION
 
 

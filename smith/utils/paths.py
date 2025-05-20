@@ -35,6 +35,10 @@ def get_node_arts(wiki_type: WikiType, node_name: str) -> list[str]:
     return [f.name for f in arts_path.glob("*.png")]
 
 
+def get_art_url(wiki_type: WikiType, node_name: str, art_name: str) -> str:
+    return f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{node_name}/assets/arts/{art_name}"
+
+
 def get_node_map(wiki_type: WikiType, node_name: str) -> Node:
     path = get_node_path(wiki_type, node_name)
     map_path = path / "map.json"
@@ -42,11 +46,6 @@ def get_node_map(wiki_type: WikiType, node_name: str) -> Node:
         return Node.model_validate_json(map_path.read_text())
     else:
         raise FileNotFoundError(f"Node map not found for {node_name}")
-
-
-# ---------------------------------------------------------------------------
-#  Prepared arts
-# ---------------------------------------------------------------------------
 
 
 def get_prepared_assets_path(wiki_type: WikiType, node_name: str) -> Path:
