@@ -3,15 +3,10 @@ from pathlib import Path
 
 import requests
 from smith.clients.replicate import Replicate
-from smith.models.wiki import WikiType
-from smith.utils.paths import get_prepared_assets_path
 from config import config
 
 
-wiki_type = WikiType.CHARACTER
-
-
-def prepare_arts(character_path: str, art_urls: list[str]) -> list[str]:
+def prepare_mesh_references(node_path: Path, art_urls: list[str]) -> list[str]:
     """Ensure a prepared art PNG exists and return its remote URL for Trellis.
 
     The image is generated via Replicate `openai/gpt-image-1`, stored locally in
@@ -22,19 +17,18 @@ def prepare_arts(character_path: str, art_urls: list[str]) -> list[str]:
     if not art_urls:
         return []
 
-    prepared_image_urls = _build_images(character_path, art_urls)
+    prepared_image_urls = _build_images(node_path, art_urls)
     return prepared_image_urls
 
 
-def _build_images(character_path: str, art_urls: list[str]) -> list[str]:
-    character_name = character_path.split("/")[-1].replace("_", " ")
-    prepared_dir = get_prepared_assets_path(wiki_type, character_path)
+def _build_images(node_path: Path, art_urls: list[str]) -> list[str]:
+    prepared_dir = node_path / "assets" / "mesh_references"
     prepared_dir.mkdir(parents=True, exist_ok=True)
     angles = ["front", "back", "side"]
     
     def process_angle(angle):
-        prepared_path = prepared_dir / f"{character_name}_{angle}.png"
-        prompt = (f"Create a full-body illustration of {character_name} standing on a completely transparent background; "
+        prepared_path = prepared_dir / f"{node_path.name}_{angle}.png"
+        prompt = (f"Create a full-body illustration of {node_path.name} standing on a completely transparent background; "
                 f"if the character is humanoid, depict them in a neutral T-pose (arms extended horizontally) from the {angle} view. "
                 f"Keep the style of the original image. No background, only the character with alpha transparency. "
                 f"Keep the size and aspect ratio of the original image.")

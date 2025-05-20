@@ -3,8 +3,8 @@ import json
 from smith.clients.openai import OpenAI
 from config import config
 from smith.models.asset import Asset, asset_types
-from smith.models.wiki import WikiType, wiki_type_to_path
-from smith.utils.paths import get_node_arts, get_node_map, get_node_map_path
+from smith.models.wiki import WikiType
+from smith.utils.paths import get_art_url, get_node_arts, get_node_map, get_node_map_path
 
 
 wiki_type = WikiType.LOCATION
@@ -13,8 +13,7 @@ wiki_type = WikiType.LOCATION
 def create_location_map(node_name: str, custom_prompt: str = ""):
     node_map = get_node_map(wiki_type, node_name)
     arts_names = get_node_arts(wiki_type, node_name)
-    arts_urls = [f"{config.wiki_cdn_url}/{wiki_type_to_path[wiki_type]}/{node_name}/assets/arts/{art_name}" for art_name in arts_names]
-
+    arts_urls = [get_art_url(wiki_type, node_name, art_name) for art_name in arts_names]
     user_prompt = build_prompt(node_name, custom_prompt)
     system_prompt = (
         f"You are a game development assistant specializing in Unreal Engine {config.unreal_engine_version} "

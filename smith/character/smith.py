@@ -5,15 +5,15 @@ from pathlib import Path
 from typing import Optional
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
+from smith.assetsmith.mesh_references import prepare_mesh_references
 from smith.character.build_3d import build_3d
-from smith.character.prepare_arts import prepare_arts
 from smith.character.prompt import build_prompt
-from smith.clients.replicate import Replicate
 from smith.models.wiki import WikiType
 from smith.utils.paths import (
     get_art_url,
     get_node_arts,
     get_node_map_path,
+    get_node_path,
 )
 
 
@@ -48,9 +48,10 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
         raise RuntimeError(f"No concept-art images found for character '{character_path}'.")
 
     # ------------------------------------------------------------------
-    # 1b. Ensure prepared art exists and retrieve remote URL (transparent, T-pose if humanoid)
+    # 1b. Ensure prepared art exists and retrieve remote URL
     # ------------------------------------------------------------------
-    prepared_image_urls = prepare_arts(character_path, art_urls)
+    node_path = get_node_path(wiki_type, character_path)
+    mesh_references_urls = prepare_mesh_references(node_path, art_urls)
 
     # ------------------------------------------------------------------
     # 2. Prepare / fetch existing metadata and build prompt
@@ -76,10 +77,6 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
         "items_to_drop": [],
     }
 
-    # Ensure mandatory keys are present / have expected values.
-    response.setdefault("voice_id", "1")
-    response.setdefault("items_to_drop", [])
-
     # ------------------------------------------------------------------
     # 3. Persist metadata to disk
     # ------------------------------------------------------------------
@@ -90,12 +87,7 @@ def create_character(character_path: str, custom_prompt: str = "") -> dict:
     # 4. Build 3-D model with Trellis – use prepared arts when present
     # ------------------------------------------------------------------
 
-    if prepared_image_urls:
-        trellis_images = prepared_image_urls
-    else:
-        trellis_images = art_urls
-
-    build_3d(character_path, trellis_images)
+    build_3d(character_path, mesh_references_urls)
 
     return response
 

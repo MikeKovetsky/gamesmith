@@ -1,13 +1,13 @@
 
-import os
 import httpx
 import replicate
+from config import config
 
 
 _DEFAULT_TIMEOUT = httpx.Timeout(1200.0) 
 
 _replicate_client = replicate.Client(
-    api_token=os.getenv("REPLICATE_API_TOKEN"),
+    api_token=config.replicate_api_token,
     timeout=_DEFAULT_TIMEOUT,
 )
 
