@@ -31,7 +31,7 @@ def _build_images(node_path: Path, art_urls: list[str]) -> list[str]:
         prompt = (f"Create a full-body illustration of {node_path.name} standing on a completely transparent background; "
                 f"if the character is humanoid, depict them in a neutral T-pose (arms extended horizontally) from the {angle} view. "
                 f"Keep the style of the original image. No background, only the character with alpha transparency. "
-                f"Keep the size and aspect ratio of the original image.")
+                f"Keep the size and aspect ratio of the original image. Don't add any shadows.")
         image_url = _build_image(prompt, art_urls)
         _save_image(image_url, prepared_path)
         return image_url

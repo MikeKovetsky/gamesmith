@@ -58,6 +58,30 @@
       "prompt": "An ambient soundscape of a desert encampment. The primary sounds are the gentle crackling of fires and the distant, soft whistle of wind. Occasional rustling of tent fabric is also audible. The mood is calm and atmospheric. Duration: 60 s loop, seamlessly loopable.",
       "quantity": 1,
       "placement_notes": "Play throughout the encampment to enhance immersion."
+    },
+    {
+      "name": "bone_archway",
+      "description": "A large archway made of bones, with hanging ornaments and carvings.",
+      "type": "object",
+      "prompt": "An imposing archway constructed from large, curved bones, featuring intricate carvings and hanging ornaments. The archway is centered in the frame, with detailed textures and a weathered appearance. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Position at the entrance of the encampment."
+    },
+    {
+      "name": "fire_pit",
+      "description": "A simple fire pit with stones arranged in a circle and a blazing fire.",
+      "type": "object",
+      "prompt": "A basic fire pit made of roughly arranged stones in a circular formation, containing a bright, blazing fire. The stones are weathered and uneven, with a rustic appearance. The background is fully transparent.",
+      "quantity": 2,
+      "placement_notes": "Place around the encampment for communal gatherings."
+    },
+    {
+      "name": "tower_ruins",
+      "description": "Ruined towers in the background, adding to the desolate atmosphere.",
+      "type": "object",
+      "prompt": "Ruined towers with crumbling stonework, partially collapsed and covered in dust. The towers are centered in the frame, showcasing their ancient, weathered texture. The background is fully transparent.",
+      "quantity": 2,
+      "placement_notes": "Position in the distance to enhance the atmosphere of desolation."
     }
   ]
 }

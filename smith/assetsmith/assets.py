@@ -49,4 +49,4 @@ async def create_assets(node_name: str) -> Node:
 
 
 if __name__ == "__main__":
-    asyncio.run(create_assets("caladyn/shatterdunes/crimson_shard"))
+    asyncio.run(create_assets("caladyn/aroth-kai"))
