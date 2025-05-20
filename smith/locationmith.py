@@ -48,7 +48,7 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
         f"The assets will be used to produce assets for in Unreal Engine {config.unreal_engine_version}."
         "Look closely at the provided reference images.",
         f"Extract ALL atomic {asset_types} from the images provided.",
-        "Include a wide variety of objects, textures, and audio suitable for this environment.",
+        "Include an extensive list of objects (including small props), textures, and audio suitable for this environment.",
         "Do not include NPCs or characters.",
         """For any asset with type \"object\", the prompt MUST:
           - Describe the asset as an isolated object centred in frame
@@ -97,6 +97,6 @@ def build_prompt(node_name: str, user_prompt: str) -> str:
     
 
 if __name__ == "__main__":
-    create_location_map("caladyn/shatterdunes/crimson_shard")
+    create_location_map("caladyn/aroth-kai")
 
 

@@ -1,0 +1,63 @@
+{
+  "name": "caladyn/aroth-kai",
+  "description": "Aroth Kai, the city of Ashwalkers.",
+  "style": "Photorealistic Arabian Nights Desert High Fantasy",
+  "assets": [
+    {
+      "name": "central_brazier",
+      "description": "A large, ornate brazier with a gothic design, holding a blazing, intense fire. The brazier has pointed arches and intricate carvings.",
+      "type": "object",
+      "prompt": "A large, ornate brazier with gothic design elements, featuring pointed arches and intricate carvings. The brazier is centered in the frame with a blazing fire emanating from it. The structure is made of dark, weathered metal, creating a stark contrast with the bright flames. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Place at the center of the encampment as a focal point."
+    },
+    {
+      "name": "tent_large",
+      "description": "A large, medieval-style tent with a pointed roof and intricate wood carvings at the entrance.",
+      "type": "object",
+      "prompt": "A large tent with a pointed roof, medieval in style, featuring sturdy fabric stretched over a wooden frame. The entrance is decorated with intricate wood carvings and supported by wooden poles. The tent's color is a dull, earthy brown, and the background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Position at the edge of the encampment, serving as a central meeting area."
+    },
+    {
+      "name": "tent_standard",
+      "description": "Standard-sized tents with pointed tops and simple designs, typical of a temporary encampment.",
+      "type": "object",
+      "prompt": "Standard-sized tents with pointed tops, made from simple, durable fabric. The tents are supported by wooden poles and ropes, with a dull, earthy color. The design is minimalistic, suitable for a temporary encampment. The background is fully transparent.",
+      "quantity": 5,
+      "placement_notes": "Scatter around the encampment in a circular pattern."
+    },
+    {
+      "name": "brazier_small",
+      "description": "Small, portable braziers used throughout the encampment for light and warmth.",
+      "type": "object",
+      "prompt": "A small, portable brazier with a simplistic metal design, suitable for providing light and warmth. The brazier is filled with glowing coals and small flames. It is made of dark metal with a rustic appearance. The background is fully transparent.",
+      "quantity": 3,
+      "placement_notes": "Place near tents for additional lighting and warmth."
+    },
+    {
+      "name": "ground_texture",
+      "description": "A seamless, tileable texture of cracked, dry earth with a rough, uneven surface.",
+      "type": "texture",
+      "prompt": "A seamless, tileable texture of cracked, dry earth. The surface is rough and uneven, with visible fissures and subtle color variations in shades of brown. Captured under neutral lighting, the texture is suitable for deriving PBR maps. Resolution: 4K.",
+      "quantity": 1,
+      "placement_notes": "Apply to the ground throughout the encampment."
+    },
+    {
+      "name": "tent_fabric_texture",
+      "description": "A seamless, tileable texture of worn tent fabric in an earthy brown color.",
+      "type": "texture",
+      "prompt": "A seamless, tileable texture of worn tent fabric, featuring an earthy brown color with subtle variations. The fabric has a coarse weave and visible wear, suitable for deriving PBR maps. Captured under neutral lighting. Two variations are provided. Resolution: 2K.",
+      "quantity": 2,
+      "placement_notes": "Use on all tent structures."
+    },
+    {
+      "name": "encampment_ambience",
+      "description": "The ambient sound of a desert encampment with crackling fires and distant wind.",
+      "type": "audio",
+      "prompt": "An ambient soundscape of a desert encampment. The primary sounds are the gentle crackling of fires and the distant, soft whistle of wind. Occasional rustling of tent fabric is also audible. The mood is calm and atmospheric. Duration: 60 s loop, seamlessly loopable.",
+      "quantity": 1,
+      "placement_notes": "Play throughout the encampment to enhance immersion."
+    }
+  ]
+}
