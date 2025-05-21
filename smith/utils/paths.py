@@ -25,6 +25,7 @@ def get_assets_path(wiki_type: WikiType, node_name: str) -> Path:
 def get_model_path(wiki_type: WikiType, node_name: str) -> Path:
     return get_assets_path(wiki_type, node_name) / "models"
 
+
 def get_texture_path(wiki_type: WikiType, node_name: str) -> Path:
     return get_assets_path(wiki_type, node_name) / "textures"
 
