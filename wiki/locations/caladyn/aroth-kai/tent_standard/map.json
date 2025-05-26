@@ -1,0 +1,15 @@
+{
+    "name": "caladyn/aroth-kai/tent_standard",
+    "description": "Standard-sized tents with pointed tops and simple designs, typical of a temporary encampment.",
+    "style": "Photorealistic Arabian Nights Desert High Fantasy",
+    "assets": [
+        {
+            "name": "tent_standard_1",
+            "description": "Standard-sized tents with pointed tops and simple designs, typical of a temporary encampment.",
+            "type": "object",
+            "prompt": "Standard-sized tents with pointed tops, made from simple, durable fabric. The tents are supported by wooden poles and ropes, with a dull, earthy color. The design is minimalistic, suitable for a temporary encampment. The background is fully transparent.",
+            "quantity": 5,
+            "placement_notes": "Scatter around the encampment in a circular pattern."
+        }
+    ]
+}
