@@ -14,6 +14,10 @@ def get_node_path(wiki_type: WikiType, node_name: str) -> Path:
     return Path(config.wiki_path) / wiki_type_to_path[wiki_type] / node_name
 
 
+def get_node_last_name(node_name: str) -> str:
+    return node_name.split("/")[-1]
+
+
 def get_node_map_path(wiki_type: WikiType, node_name: str) -> Path:
     return get_node_path(wiki_type, node_name) / "map.json"
 
@@ -32,7 +36,7 @@ def get_texture_path(wiki_type: WikiType, node_name: str) -> Path:
 
 def get_node_arts(wiki_type: WikiType, node_name: str) -> list[str]:
     node_path = get_node_path(wiki_type, node_name)
-    arts_path = node_path / "assets" / "arts"
+    arts_path = node_path / "arts"
     return [f.name for f in arts_path.glob("*.png")]
 
 

@@ -19,12 +19,13 @@ async def _create_asset(node_name: str, asset: Asset) -> Any:
 
     Audio assets are currently ignored.
     """
+    asset_node_name = f"{node_name}/{asset.name}"
     match asset.type:
         case AssetType.Texture:
             pass
             # return await asyncio.to_thread(create_texture, node, asset)
         case AssetType.Object:
-            return await asyncio.to_thread(build_mesh, node_name, wiki_type)
+            return await asyncio.to_thread(build_mesh, asset_node_name, wiki_type)
         case AssetType.Audio:
             # Skip audio for now – return None so the caller knows it was ignored.
             return None

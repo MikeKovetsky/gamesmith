@@ -6,7 +6,7 @@ import requests
 from smith.assetsmith.mesh_references import prepare_mesh_references
 from smith.clients.replicate import Replicate
 from smith.models.wiki import WikiType
-from smith.utils.paths import get_art_url, get_model_path, get_node_arts, get_node_path
+from smith.utils.paths import get_art_url, get_model_path, get_node_arts, get_node_last_name, get_node_path
 
 
 def build_mesh(node_name: str, wiki_type: WikiType) -> None:
@@ -24,11 +24,11 @@ def build_mesh(node_name: str, wiki_type: WikiType) -> None:
         "seed": 0,
         "images": mesh_references_urls,
         "texture_size": 2048,
-        "mesh_simplify": 0.9,
+        "mesh_simplify": 0.95,
         "generate_color": True,
         "generate_model": True,
         "randomize_seed": True,
-        "generate_normal": False,
+        "generate_normal": True,
         "save_gaussian_ply": True,
         "ss_sampling_steps": 50,
         "slat_sampling_steps": 50,
@@ -51,7 +51,7 @@ def build_mesh(node_name: str, wiki_type: WikiType) -> None:
 
     models_dir = get_model_path(wiki_type, node_name)
     models_dir.mkdir(parents=True, exist_ok=True)
-    model_file_path = models_dir / f"{node_name}.glb"
+    model_file_path = models_dir / f"{get_node_last_name(node_name)}.glb"
 
     with open(model_file_path, "wb") as fp:
         fp.write(model_bytes)

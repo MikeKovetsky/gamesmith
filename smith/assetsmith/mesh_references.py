@@ -42,20 +42,22 @@ def _build_images(node_path: Path, wiki_type: WikiType, art_urls: list[str]) -> 
             )
         elif wiki_type == WikiType.LOCATION:
             prompt = (
-                f"Create a full-body location asset "
+                f"Create a detailed illustration of the location asset {node_path.name} on a completely transparent background. "
+                f"Show the asset from the {angle} view. "
+                f"Ensure the lighting is even and there are no harsh shadows or overly bright highlights. "
             )
 
-        prompt = (
-            f"Keep the style of the attached reference images. No background, only the character with alpha transparency. "
+        prompt += (
+            f"Keep the artistic style of the attached reference images. No background, only the {wiki_type.value} with alpha transparency. "
             f"Show the {wiki_type.value} from the {angle} view."
             f"Keep the size and aspect ratio of the attached reference images."
             f"Don't add any shadows, reflections, particles, flying objects, or other visual effects."
             f"This image will be used to generate a 3D model."
             f"Ensure the {wiki_type.value} is centered in the frame and positioned symmetrically. "
             f"Show the {wiki_type.value} with in perfect lighting like there is no shadows. "
-            f"Keep details crisp and clear, especially around edges and features. "
+            f"Keep details crisp and clear and the same as in the reference images. "
             f"If the {wiki_type.value} has any distinctive features, accessories, or markings, ensure they are visible and accurate. "
-            f"Make sure the {wiki_type.value}'s proportions are anatomically correct and consistent with the original reference."
+            f"Make sure the {wiki_type.value}'s proportions are realistic and consistent with the original reference."
             f"Never draw floors, walls, or other background elements."
         )
 
