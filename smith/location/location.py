@@ -10,7 +10,7 @@ from smith.location.map import create_location_map
 
 def create_location(node_name: str, custom_prompt: str = ""):
     # create_location_map(node_name, custom_prompt)
-    # create_location_arts(node_name)
+    create_location_arts(node_name)
     create_location_assets(node_name)
     
 

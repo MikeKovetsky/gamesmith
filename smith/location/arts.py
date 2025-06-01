@@ -37,6 +37,7 @@ def _create_asset_art(asset: Asset, location_arts_urls: list[str]):
         The asset is a {asset.type} called {asset.name}. 
         The visual prompt is {asset.prompt}. 
         The placement notes are {asset.placement_notes}.
+        STYLE: {config.style}
         """
     )
     response = _build_image(prompt, location_arts_urls)

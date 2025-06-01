@@ -26,7 +26,7 @@ def prepare_mesh_references(node_path: Path, wiki_type: WikiType, art_urls: list
 
 
 def _build_images(node_path: Path, wiki_type: WikiType, art_urls: list[str]) -> list[str]:
-    prepared_dir = node_path / "assets" / "mesh_references"
+    prepared_dir = node_path / "mesh_references"
     prepared_dir.mkdir(parents=True, exist_ok=True)
     angles = ["front", "back", "side"]
     
@@ -59,6 +59,8 @@ def _build_images(node_path: Path, wiki_type: WikiType, art_urls: list[str]) -> 
             f"If the {wiki_type.value} has any distinctive features, accessories, or markings, ensure they are visible and accurate. "
             f"Make sure the {wiki_type.value}'s proportions are realistic and consistent with the original reference."
             f"Never draw floors, walls, or other background elements."
+            f"Remove fire, rain, snow and all other particles."
+            f"STYLE: {config.style}"
         )
 
         image_url = _build_image(prompt, art_urls)
@@ -107,8 +109,9 @@ def _save_image(image_url: str, prepared_path: Path) -> None:
 def _get_aspect_ratio(art_urls: list[str]) -> str:
     if not art_urls:
         return "1:1"
-        
-    first_image = requests.get(art_urls[0]).content
+    art_url = art_urls[0]
+    print(f"Getting aspect ratio for {art_url}")
+    first_image = requests.get(art_url).content
     img = Image.open(io.BytesIO(first_image))
     width, height = img.size
     
