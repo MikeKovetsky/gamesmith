@@ -1,5 +1,4 @@
 from pathlib import Path
-import subprocess
 
 import requests
 
@@ -10,6 +9,14 @@ from smith.utils.paths import get_art_url, get_model_path, get_node_arts, get_no
 
 
 def build_mesh(node_name: str, wiki_type: WikiType) -> None:
+    models_dir = get_model_path(wiki_type, node_name)
+    models_dir.mkdir(parents=True, exist_ok=True)
+    model_file_path = models_dir / f"{get_node_last_name(node_name)}.glb"
+    if model_file_path.exists():
+        print(f"3-D model already exists at {model_file_path.relative_to(Path.cwd())}")
+        return
+    print(f"Building 3-D model for {node_name}")
+
     node_path = get_node_path(wiki_type, node_name)
     art_names = get_node_arts(wiki_type, node_name)
     art_urls = [
@@ -48,10 +55,6 @@ def build_mesh(node_name: str, wiki_type: WikiType) -> None:
         model_bytes = requests.get(model_url).content
     except Exception as exc:
         raise RuntimeError(f"Failed to download Trellis model from {model_url!r}: {exc}")
-
-    models_dir = get_model_path(wiki_type, node_name)
-    models_dir.mkdir(parents=True, exist_ok=True)
-    model_file_path = models_dir / f"{get_node_last_name(node_name)}.glb"
 
     with open(model_file_path, "wb") as fp:
         fp.write(model_bytes)

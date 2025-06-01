@@ -28,6 +28,22 @@
       "placement_notes": "Scatter around the encampment in a circular pattern."
     },
     {
+      "name": "tent_standard_2",
+      "description": "Standard-sized tents with pointed tops and simple designs, typical of a temporary encampment.",
+      "type": "object",
+      "prompt": "Standard-sized tents with pointed tops, made from simple, durable fabric. The tents are supported by wooden poles and ropes, with a dull, earthy color. The design is minimalistic, suitable for a temporary encampment. The background is fully transparent.",
+      "quantity": 5,
+      "placement_notes": "Scatter around the encampment in a circular pattern."
+    },
+    {
+      "name": "tent_standard_3",
+      "description": "Standard-sized tents with pointed tops and simple designs, typical of a temporary encampment.",
+      "type": "object",
+      "prompt": "Standard-sized tents with pointed tops, made from simple, durable fabric. The tents are supported by wooden poles and ropes, with a dull, earthy color. The design is minimalistic, suitable for a temporary encampment. The background is fully transparent.",
+      "quantity": 5,
+      "placement_notes": "Scatter around the encampment in a circular pattern."
+    },
+    {
       "name": "brazier_small",
       "description": "Small, portable braziers used throughout the encampment for light and warmth.",
       "type": "object",
@@ -82,6 +98,62 @@
       "prompt": "Ruined towers with crumbling stonework, partially collapsed and covered in dust. The towers are centered in the frame, showcasing their ancient, weathered texture. The background is fully transparent.",
       "quantity": 2,
       "placement_notes": "Position in the distance to enhance the atmosphere of desolation."
+    },
+    {
+      "name": "tower_ruins_2",
+      "description": "Ruined towers in the background, adding to the desolate atmosphere.",
+      "type": "object",
+      "prompt": "Ruined towers with crumbling stonework, partially collapsed and covered in dust. The towers are centered in the frame, showcasing their ancient, weathered texture. The background is fully transparent.",
+      "quantity": 2,
+      "placement_notes": "Position in the distance to enhance the atmosphere of desolation."
+    },
+    {
+      "name": "clay_water_basin",
+      "description": "A weathered clay basin used for storing scarce desert water, often placed in shaded areas.",
+      "type": "object",
+      "prompt": "A weathered clay basin, wide and shallow, with cracks and sun-faded glaze. Filled with slightly murky water and set on cracked earth. The background is fully transparent.",
+      "quantity": 2,
+      "placement_notes": "Place near large tents and shaded areas to suggest daily utility."
+    },
+    {
+      "name": "covered_loom_station",
+      "description": "A simple loom under a fabric awning where Ashwalkers weave garments and veils.",
+      "type": "object",
+      "prompt": "A primitive loom made of wooden poles and sinew, placed under a simple awning made of stretched cloth. Partially woven fabric hangs from the loom. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Place on the edge of the encampment near tents to depict crafting activity."
+    },
+    {
+      "name": "solar_cook_pit",
+      "description": "A reflective cooking station using desert sunlight to slow-cook meals.",
+      "type": "object",
+      "prompt": "A desert solar cook pit with a metallic, concave reflector angled toward a simple clay pot. Sand and pebbles surround the setup. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Place away from footpaths, positioned to catch maximum sunlight."
+    },
+    {
+      "name": "whispering_obelisk",
+      "description": "A blackened stone obelisk etched with faint runes said to whisper in the wind.",
+      "type": "object",
+      "prompt": "A tall, weathered stone obelisk with faint glowing runes etched across its surface. The texture is blackened and pitted by sand. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Position on a small rise or central vantage point as a spiritual focus."
+    },
+    {
+      "name": "prayer_ring",
+      "description": "A ring of worn stones arranged in a perfect circle, used for silent dawn rituals.",
+      "type": "object",
+      "prompt": "A perfect circle of standing stones, worn and half-buried in sand. Each stone bears faint carvings or scorch marks. The background is fully transparent.",
+      "quantity": 1,
+      "placement_notes": "Place on a slight rise or cleared space near the outskirts of the camp for ritual use."
+    },
+    {
+      "name": "bone_wind_chime",
+      "description": "A delicate wind chime made of small bones and shell fragments, creating haunting tones in the breeze.",
+      "type": "object",
+      "prompt": "A handmade wind chime constructed from small animal bones and shell fragments, strung together with sinew and hanging from a carved wooden ring. The bones are weathered and pale, softly clinking together. The background is fully transparent.",
+      "quantity": 3,
+      "placement_notes": "Hang from tent poles and archways to produce ambient, spiritual sounds throughout the village."
     }
   ]
 }

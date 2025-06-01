@@ -13,10 +13,12 @@ def create_location_arts(location_node_name: str):
     arts_names = get_node_arts(WikiType.LOCATION, location_node_name)
     location_arts_urls = [get_art_url(WikiType.LOCATION, location_node_name, art_name) for art_name in arts_names]
     location_map = get_node_map(WikiType.LOCATION, location_node_name)
+    new_assets = [asset for asset in location_map.assets if not _get_art_path(asset.name, location_node_name).exists()]
+    print(f"Creating art for {len(new_assets)} assets: {', '.join([asset.name for asset in new_assets])}")
     with concurrent.futures.ThreadPoolExecutor() as executor:
         future_to_asset = {
             executor.submit(_create_asset_art, asset, location_arts_urls): asset 
-            for asset in location_map.assets
+            for asset in new_assets
         }
         for future in concurrent.futures.as_completed(future_to_asset):
             asset = future_to_asset[future]
@@ -67,8 +69,12 @@ def _build_image(prompt: str, art_urls: list[str]) -> str:
 
 def _save_image(image_url: str, asset_name: str, location_node_name: str) -> None:
     image_bytes = requests.get(image_url).content
-    prepared_path = get_node_path(WikiType.LOCATION, location_node_name) / asset_name / "arts" / "art.png"
-    prepared_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(prepared_path, "wb") as fp:
+    art_path = _get_art_path(asset_name, location_node_name)
+    art_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(art_path, "wb") as fp:
         fp.write(image_bytes)
-    print(f"Prepared art saved to {prepared_path.relative_to(Path.cwd())} (source: {image_url})")
+    print(f"Prepared art saved to {art_path.relative_to(Path.cwd())} (source: {image_url})")
+
+
+def _get_art_path(asset_name: str, location_node_name: str) -> Path:
+    return get_node_path(WikiType.LOCATION, location_node_name) / asset_name / "arts" / "art.png"

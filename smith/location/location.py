@@ -1,7 +1,3 @@
-import json
-
-from smith.clients.openai import OpenAI
-from config import config
 from smith.location.arts import create_location_arts
 from smith.location.assets import create_location_assets
 from smith.location.map import create_location_map
